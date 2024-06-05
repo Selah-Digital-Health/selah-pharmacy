@@ -49,21 +49,13 @@ body {
     padding: 1rem 0.5rem;
 }
 
-section {
-    width: 100%;
-    max-width: 420px;
-    min-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 1rem;
-    background-color: rgba(35, 31, 31, 0.4);
-}
+
 
 roundedSection {
     width: 100%;
     max-width: 420px;
-    min-height: 400px;
+    height: 600px;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
