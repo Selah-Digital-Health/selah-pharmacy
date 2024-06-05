@@ -14,7 +14,7 @@ const Register = () => {
     const firstNameRef = useRef();
     const lastNameRef = useRef();
     const rxNumberRef = useRef();
-    const birthdateRef = useRef();
+    const birthDateRef = useRef();
     const mobileRef = useRef();
 
     const [user, setUser] = useState('');
@@ -225,6 +225,7 @@ const Register = () => {
                         <input
                             type="tel"
                             id="mobile"
+                            mask="999-999-9999"
                             ref={mobileRef}
                             autoComplete="off"
                             onChange={(e) => setMobile(e.target.value)}
@@ -234,6 +235,23 @@ const Register = () => {
                             aria-describedby="mobileNote"
                             onFocus={() => setMobileFocus(true)}
                             onBlur={() => setMobileFocus(false)}
+                        />
+
+                        <label>
+                            Birthdate:
+                        </label>
+                        <input
+                            type="date"
+                            id="birthDate"
+                            ref={birthDateRef}
+                            autoComplete="off"
+                            onChange={(e) => setBirthDate(e.target.value)}
+                            value={birthDate}
+                            required
+                            aria-invalid={validName ? "false" : "true"}
+                            aria-describedby="birthDateNote"
+                            onFocus={() => setBirthDateFocus(true)}
+                            onBlur={() => setBirthDateFocus(false)}
                         />
 
                         <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
