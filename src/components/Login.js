@@ -61,10 +61,13 @@ const Login = () => {
     }
 
     return (
-
-        <section>
+        <roundedSection>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
+            <div>
+                <h1>Welcome</h1>
+                <h2>We're Glad to See You!</h2>
+            </div>
+
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username:</label>
                 <input
@@ -85,15 +88,20 @@ const Login = () => {
                     value={pwd}
                     required
                 />
-                <button>Sign In</button>
+                <font size="2" align="right">
+                    <Link to="/PasswordReset">Forgot Password?</Link>
+                </font>
+                <button>Log In</button>
             </form>
-            <p>
-                Need an Account?<br />
-                <span className="line">
-                    <Link to="/register">Sign Up</Link>
-                </span>
-            </p>
-        </section>
+            <font size="3"> 
+                <p>
+                    Need an Account?<br />
+                    <span className="line">
+                        <Link to="/register">Sign Up Here!</Link>
+                    </span>
+                </p>
+            </font>
+        </roundedSection>
 
     )
 }

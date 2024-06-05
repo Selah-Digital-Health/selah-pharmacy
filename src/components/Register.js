@@ -11,10 +11,30 @@ const REGISTER_URL = '/register';
 const Register = () => {
     const userRef = useRef();
     const errRef = useRef();
+    const firstNameRef = useRef();
+    const lastNameRef = useRef();
+    const rxNumberRef = useRef();
+    const birthdateRef = useRef();
+    const mobileRef = useRef();
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
+
+    const [firstName, setFirstName] = useState('');
+    const [firstNameFocus, setFirstNameFocus] = useState(false);
+
+    const [lastName, setLastName] = useState('');
+    const [lastNameFocus, setLastNameFocus] = useState(false);
+
+    const [mobile, setMobile] = useState('');
+    const [mobileFocus, setMobileFocus] = useState(false);
+
+    const[birthDate, setBirthDate] = useState('');
+    const [birthDateFocus, setBirthDateFocus] = useState(false);
+
+    const[rx, setRx] = useState('');
+    const [rxFocus, setRxFocus] = useState(false);
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -91,12 +111,47 @@ const Register = () => {
                     </p>
                 </section>
             ) : (
-                <section>
+                <roundedSection>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
+                    <h1>Sign-Up</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">
-                            Username:
+                        
+                        <label>
+                            First Name:
+                        </label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            ref={firstNameRef}
+                            autoComplete="off"
+                            onChange={(e) => setFirstName(e.target.value)}
+                            value={firstName}
+                            required
+                            aria-invalid={validName ? "false" : "true"}
+                            aria-describedby="firstNameNote"
+                            onFocus={() => setFirstNameFocus(true)}
+                            onBlur={() => setFirstNameFocus(false)}
+                        />
+
+                        <label>
+                            Last Name:
+                        </label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            ref={lastNameRef}
+                            autoComplete="off"
+                            onChange={(e) => setLastName(e.target.value)}
+                            value={lastName}
+                            required
+                            aria-invalid={validName ? "false" : "true"}
+                            aria-describedby="lastNameNote"
+                            onFocus={() => setLastNameFocus(true)}
+                            onBlur={() => setLastNameFocus(false)}
+                        />
+
+                        <label htmlFor="email">
+                            Email:
                             <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
                         </label>
@@ -119,7 +174,6 @@ const Register = () => {
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
                         </p>
-
 
                         <label htmlFor="password">
                             Password:
@@ -144,7 +198,6 @@ const Register = () => {
                             Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                         </p>
 
-
                         <label htmlFor="confirm_pwd">
                             Confirm Password:
                             <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
@@ -166,15 +219,34 @@ const Register = () => {
                             Must match the first password input field.
                         </p>
 
+                        <label>
+                            Mobile Phone Number:
+                        </label>
+                        <input
+                            type="tel"
+                            id="mobile"
+                            ref={mobileRef}
+                            autoComplete="off"
+                            onChange={(e) => setMobile(e.target.value)}
+                            value={mobile}
+                            required
+                            aria-invalid={validName ? "false" : "true"}
+                            aria-describedby="mobileNote"
+                            onFocus={() => setMobileFocus(true)}
+                            onBlur={() => setMobileFocus(false)}
+                        />
+
                         <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
                     </form>
-                    <p>
-                        Already registered?<br />
-                        <span className="line">
-                            <Link to="/">Sign In</Link>
-                        </span>
-                    </p>
-                </section>
+                    <font size="3"> 
+                        <p>
+                            Already registered?<br />
+                            <span className="line">
+                                <Link to="/login">Sign In Here</Link>
+                            </span>
+                        </p>
+                    </font>
+                </roundedSection>
             )}
         </>
     )
