@@ -28,12 +28,14 @@ const Register = () => {
     const [lastNameFocus, setLastNameFocus] = useState(false);
 
     const [mobile, setMobile] = useState('');
+    const [validMobile, setValidMobile] = useState(false);
     const [mobileFocus, setMobileFocus] = useState(false);
 
-    const[birthDate, setBirthDate] = useState('');
+    const [birthDate, setBirthDate] = useState('');
     const [birthDateFocus, setBirthDateFocus] = useState(false);
 
-    const[rx, setRx] = useState('');
+    const [rx, setRx] = useState('');
+    const [validRx, setValidRx] = useState(false);
     const [rxFocus, setRxFocus] = useState(false);
 
     const [pwd, setPwd] = useState('');
@@ -236,6 +238,11 @@ const Register = () => {
                             onFocus={() => setMobileFocus(true)}
                             onBlur={() => setMobileFocus(false)}
                         />
+                        <p id="mobile" className={mobileFocus && !validMobile ? "instructions" : "offscreen"}>
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            <br />
+                            Ensure your phone number follows the following format: ###-###-####
+                        </p>
 
                         <label>
                             Birthdate:
@@ -253,6 +260,34 @@ const Register = () => {
                             onFocus={() => setBirthDateFocus(true)}
                             onBlur={() => setBirthDateFocus(false)}
                         />
+
+                        <label htmlFor="rxNumber">
+                            Rx Number:
+                            <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
+                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
+                        </label>
+                        <input
+                            type="text"
+                            id="rxNumber"
+                            ref={rxNumberRef}
+                            autoComplete="off"
+                            onChange={(e) => setRx(e.target.value)}
+                            value={birthDate}
+                            required
+                            aria-invalid={validName ? "false" : "true"}
+                            aria-describedby="rxNote"
+                            onFocus={() => setRxFocus(true)}
+                            onBlur={() => setRxFocus(false)}
+                        />
+                        <p id="rxNumber" className={rxFocus && !validRx ? "instructions" : "offscreen"}>
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            <br />
+                            Your Rx number is located on your prescription bottle. It may be preceded by the following: <br />
+                            Rx: <br />
+                            Rx # <br />
+                            No: <br />
+                            *It may include a dash or the letter "C" or "N"
+                        </p>
 
                         <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
                     </form>
