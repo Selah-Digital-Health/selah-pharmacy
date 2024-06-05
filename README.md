@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # "React Protected Routes with Role-Based User Authorization"
 
 ✅ [Check out my YouTube Channel with all of my tutorials](https://www.youtube.com/DaveGrayTeachesCode).
@@ -15,3 +16,7 @@ I suggest completing my [8 hour JavaScript course tutorial video](https://youtu.
 ### Academic Honesty
 
 **DO NOT COPY FOR AN ASSIGNMENT** - Avoid plagiargism and adhere to the spirit of this [Academic Honesty Policy](https://www.freecodecamp.org/news/academic-honesty-policy/).
+=======
+# selah-pharmacy
+Pharmacy-App
+>>>>>>> upstream/main
