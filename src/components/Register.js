@@ -261,7 +261,7 @@ const Register = () => {
                             type="text"
                             id="mobile"
                             name="mobile"
-                            maxlength="10"
+                            maxlength="12"
                             // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
                             placeholder="123-456-7890"
                             ref={mobileRef}
