@@ -10,6 +10,7 @@ const REGISTER_URL = '/register';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RX_REGEX = /^([C,N.-])(?=.*[0-9]).{6,8}$/;
 
+
 const Register = () => {
     // const userRef = useRef();
     const errRef = useRef();
@@ -35,10 +36,7 @@ const Register = () => {
     const [mobileFocus, setMobileFocus] = useState(false);
 
     const [birthDate, setBirthDate] = useState('');
-<<<<<<< Updated upstream
-=======
     const [validDate, setValidDate] = useState(false);
->>>>>>> Stashed changes
     const [birthDateFocus, setBirthDateFocus] = useState(false);
 
     const [rx, setRx] = useState('');
@@ -129,7 +127,7 @@ const Register = () => {
                     </p>
                 </section>
             ) : (
-                <roundedSection>
+                <roundedSectionScroll>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Sign-Up</h1>
                     <form onSubmit={handleSubmit}>
@@ -140,6 +138,7 @@ const Register = () => {
                         <input
                             type="text"
                             id="firstName"
+                            placeholder="Jill"
                             ref={firstNameRef}
                             autoComplete="off"
                             onChange={(e) => setFirstName(e.target.value)}
@@ -157,6 +156,7 @@ const Register = () => {
                         <input
                             type="text"
                             id="lastName"
+                            placeholder="Doe"
                             ref={lastNameRef}
                             autoComplete="off"
                             onChange={(e) => setLastName(e.target.value)}
@@ -176,6 +176,7 @@ const Register = () => {
                         <input
                             type="email"
                             id="email"
+                            placeholder="example@email.com"
                             ref={emailRef}
                             autoComplete="off"
                             onChange={(e) => setEmail(e.target.value)}
@@ -239,14 +240,16 @@ const Register = () => {
                             Mobile Phone Number:
                         </label>
                         <input
-                            type="tel"
+                            type="text"
                             id="mobile"
-                            mask="999-999-9999"
+                            name="mobile"
+                            maxlength="10"
+                            // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
+                            placeholder="123-456-7890"
                             ref={mobileRef}
                             autoComplete="off"
                             onChange={(e) => setMobile(e.target.value)}
-                            value={mobile}
-                            required
+                            value={mobile} required
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="mobileNote"
                             onFocus={() => setMobileFocus(true)}
@@ -257,11 +260,7 @@ const Register = () => {
                             <br />
                             Ensure your phone number follows the following format: ###-###-####
                         </p>
-<<<<<<< Updated upstream
-
-=======
                         
->>>>>>> Stashed changes
                         <label>
                             Birthdate:
                         </label>
@@ -273,46 +272,11 @@ const Register = () => {
                             onChange={(e) => setBirthDate(e.target.value)}
                             value={birthDate}
                             required
-<<<<<<< Updated upstream
-                            aria-invalid={validName ? "false" : "true"}
-=======
                             aria-invalid={validDate ? "false" : "true"}
->>>>>>> Stashed changes
                             aria-describedby="birthDateNote"
                             onFocus={() => setBirthDateFocus(true)}
                             onBlur={() => setBirthDateFocus(false)}
                         />
-<<<<<<< Updated upstream
-
-                        <label htmlFor="rxNumber">
-                            Rx Number:
-                            <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
-                        </label>
-                        <input
-                            type="text"
-                            id="rxNumber"
-                            ref={rxNumberRef}
-                            autoComplete="off"
-                            onChange={(e) => setRx(e.target.value)}
-                            value={birthDate}
-                            required
-                            aria-invalid={validName ? "false" : "true"}
-                            aria-describedby="rxNote"
-                            onFocus={() => setRxFocus(true)}
-                            onBlur={() => setRxFocus(false)}
-                        />
-                        <p id="rxNumber" className={rxFocus && !validRx ? "instructions" : "offscreen"}>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                            <br />
-                            Your Rx number is located on your prescription bottle. It may be preceded by the following: <br />
-                            Rx: <br />
-                            Rx # <br />
-                            No: <br />
-                            *It may include a dash or the letter "C" or "N"
-                        </p>
-=======
->>>>>>> Stashed changes
 
                         <label htmlFor="rxNumber">
                             Rx Number:
@@ -352,7 +316,7 @@ const Register = () => {
                             </span>
                         </p>
                     </font>
-                </roundedSection>
+                </roundedSectionScroll>
             )}
         </>
     )
