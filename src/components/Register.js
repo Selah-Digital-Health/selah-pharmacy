@@ -79,6 +79,24 @@ const Register = () => {
         setErrMsg('');
     }, [email, pwd, matchPwd])
 
+    const formatPhoneNumber = (value) => {
+        if (!value) return value;
+        const phoneNumber = value.replace(/[^\d]/g, '');
+        const phoneNumberLength = phoneNumber.length;
+    
+        if (phoneNumberLength < 4) return phoneNumber;
+        if (phoneNumberLength < 7) {
+            return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+        }
+        return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+    };
+
+    const handlePhoneNumberChange = (e) => {
+        const formattedPhoneNumber = formatPhoneNumber(e.target.value);
+        setMobile(formattedPhoneNumber);
+        setValidMobile(formattedPhoneNumber.length === 12); // Checks if the phone number is fully formatted
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack
@@ -246,7 +264,7 @@ const Register = () => {
                             maxlength="10"
                             // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
                             placeholder="123-456-7890"
-                            ref={mobileRef}
+                            ref={handlePhoneNumberChange}
                             autoComplete="off"
                             onChange={(e) => setMobile(e.target.value)}
                             value={mobile} required
