@@ -9,6 +9,7 @@ import Unauthorized from './components/Unauthorized';
 import Lounge from './components/Lounge';
 import LinkPage from './components/LinkPage';
 import RequireAuth from './components/RequireAuth';
+import PasswordReset from './components/PasswordReset';
 import { Routes, Route } from 'react-router-dom';
 
 const ROLES = {
@@ -25,6 +26,7 @@ function App() {
         {/* public routes */}
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="passwordReset" element={<PasswordReset />} />
         <Route path="linkpage" element={<LinkPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 

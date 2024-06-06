@@ -4,22 +4,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 import { Link } from "react-router-dom";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+// const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RX_REGEX = /^([C,N.-])(?=.*[0-9]).{6,8}$/;
 
 const Register = () => {
-    const userRef = useRef();
+    // const userRef = useRef();
     const errRef = useRef();
     const firstNameRef = useRef();
+    const emailRef = useRef();
     const lastNameRef = useRef();
     const rxNumberRef = useRef();
     const birthDateRef = useRef();
     const mobileRef = useRef();
 
-    const [user, setUser] = useState('');
+    // const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
-    const [userFocus, setUserFocus] = useState(false);
+    // const [userFocus, setUserFocus] = useState(false);
 
     const [firstName, setFirstName] = useState('');
     const [firstNameFocus, setFirstNameFocus] = useState(false);
@@ -32,11 +35,19 @@ const Register = () => {
     const [mobileFocus, setMobileFocus] = useState(false);
 
     const [birthDate, setBirthDate] = useState('');
+<<<<<<< Updated upstream
+=======
+    const [validDate, setValidDate] = useState(false);
+>>>>>>> Stashed changes
     const [birthDateFocus, setBirthDateFocus] = useState(false);
 
     const [rx, setRx] = useState('');
     const [validRx, setValidRx] = useState(false);
     const [rxFocus, setRxFocus] = useState(false);
+
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -50,12 +61,8 @@ const Register = () => {
     const [success, setSuccess] = useState(false);
 
     useEffect(() => {
-        userRef.current.focus();
+        emailRef.current.focus();
     }, [])
-
-    useEffect(() => {
-        setValidName(USER_REGEX.test(user));
-    }, [user])
 
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
@@ -63,13 +70,21 @@ const Register = () => {
     }, [pwd, matchPwd])
 
     useEffect(() => {
+        setValidEmail(EMAIL_REGEX.test(email));
+    }, [email]);
+
+    useEffect(() => {
+        setValidRx(RX_REGEX.test(rx));
+    }, [rx]);
+
+    useEffect(() => {
         setErrMsg('');
-    }, [user, pwd, matchPwd])
+    }, [email, pwd, matchPwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // if button enabled with JS hack
-        const v1 = USER_REGEX.test(user);
+        const v1 = EMAIL_REGEX.test(email);   //changed from user  const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2) {
             setErrMsg("Invalid Entry");
@@ -77,7 +92,7 @@ const Register = () => {
         }
         try {
             const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ user, pwd }),
+                JSON.stringify({ email, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -88,9 +103,10 @@ const Register = () => {
             //console.log(JSON.stringify(response))
             setSuccess(true);
             //clear state and controlled inputs
-            setUser('');
+            // setUser('');    removed for email > username implementation
             setPwd('');
             setMatchPwd('');
+            setEmail('');
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -154,27 +170,25 @@ const Register = () => {
 
                         <label htmlFor="email">
                             Email:
-                            <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
+                            <FontAwesomeIcon icon={faCheck} className={validEmail ? "valid" : "hide"} />
+                            <FontAwesomeIcon icon={faTimes} className={validEmail || !email ? "hide" : "invalid"} />
                         </label>
                         <input
-                            type="text"
-                            id="username"
-                            ref={userRef}
+                            type="email"
+                            id="email"
+                            ref={emailRef}
                             autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                             required
-                            aria-invalid={validName ? "false" : "true"}
-                            aria-describedby="uidnote"
-                            onFocus={() => setUserFocus(true)}
-                            onBlur={() => setUserFocus(false)}
+                            aria-invalid={validEmail ? "false" : "true"}
+                            aria-describedby="emailnote"
+                            onFocus={() => setEmailFocus(true)}
+                            onBlur={() => setEmailFocus(false)}
                         />
-                        <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+                        <p id="emailnote" className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            4 to 24 characters.<br />
-                            Must begin with a letter.<br />
-                            Letters, numbers, underscores, hyphens allowed.
+                            Please enter a valid email address.
                         </p>
 
                         <label htmlFor="password">
@@ -243,7 +257,11 @@ const Register = () => {
                             <br />
                             Ensure your phone number follows the following format: ###-###-####
                         </p>
+<<<<<<< Updated upstream
 
+=======
+                        
+>>>>>>> Stashed changes
                         <label>
                             Birthdate:
                         </label>
@@ -255,11 +273,16 @@ const Register = () => {
                             onChange={(e) => setBirthDate(e.target.value)}
                             value={birthDate}
                             required
+<<<<<<< Updated upstream
                             aria-invalid={validName ? "false" : "true"}
+=======
+                            aria-invalid={validDate ? "false" : "true"}
+>>>>>>> Stashed changes
                             aria-describedby="birthDateNote"
                             onFocus={() => setBirthDateFocus(true)}
                             onBlur={() => setBirthDateFocus(false)}
                         />
+<<<<<<< Updated upstream
 
                         <label htmlFor="rxNumber">
                             Rx Number:
@@ -288,8 +311,38 @@ const Register = () => {
                             No: <br />
                             *It may include a dash or the letter "C" or "N"
                         </p>
+=======
+>>>>>>> Stashed changes
 
-                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                        <label htmlFor="rxNumber">
+                            Rx Number:
+                            <FontAwesomeIcon icon={faCheck} className={validRx ? "valid" : "hide"} />
+                            <FontAwesomeIcon icon={faTimes} className={validRx || !rx ? "hide" : "invalid"} />
+                        </label>
+                        <input
+                            type="text"
+                            id="rxNumber"
+                            ref={rxNumberRef}
+                            autoComplete="off"
+                            onChange={(e) => setRx(e.target.value)}
+                            value={rx}
+                            required
+                            aria-invalid={validRx ? "false" : "true"}
+                            aria-describedby="rxNote"
+                            onFocus={() => setRxFocus(true)}
+                            onBlur={() => setRxFocus(false)}
+                        />
+                        <p id="rxNumber" className={rxFocus && !validRx ? "instructions" : "offscreen"}>
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                            <br />
+                            Your Rx number is located on your prescription bottle. It may be preceded by the following: <br />
+                            Rx: <br />
+                            Rx # <br />
+                            No: <br />
+                            *It may include a dash or the letter "C" or "N"
+                        </p>
+
+                        <button disabled={!validName || !validPwd || !validMatch || !validEmail || !validMobile || !validRx ? true : false}>Sign Up</button>
                     </form>
                     <font size="3"> 
                         <p>

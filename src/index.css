@@ -29,6 +29,25 @@ h2 {
     padding-top: 6px;
     padding-bottom: 10px;
 }
+h3 {
+    font-family: "Gill Sans", sans-serif;
+    font-size: 40px;
+    font-weight: lighter;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+
+}
+h4 {
+    font-family: "Gill Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 550;
+    text-align: center;
+    padding-top: 6px;
+    padding-bottom: 10px;
+
+}
 
 body {
     min-height: 100vh;
@@ -77,6 +96,9 @@ a:visited {
 }
 
 input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
 input[type="password"],
 button,
 textarea {
