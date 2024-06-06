@@ -264,9 +264,9 @@ const Register = () => {
                             maxlength="10"
                             // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
                             placeholder="123-456-7890"
-                            ref={handlePhoneNumberChange}
+                            ref={mobileRef}
                             autoComplete="off"
-                            onChange={(e) => setMobile(e.target.value)}
+                            onChange={handlePhoneNumberChange}
                             value={mobile} required
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="mobileNote"
